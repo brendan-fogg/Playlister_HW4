@@ -11,8 +11,7 @@ export const AuthActionType = {
     LOGIN_USER: "LOGIN_USER",
     LOGOUT_USER: "LOGOUT_USER",
     REGISTER_USER: "REGISTER_USER",
-    ERROR_IN_REGISTER: "ERROR_IN_REGISTER",
-    ERROR_IN_LOGIN: "ERROR_IN_LOGIN",
+    ERROR_IN_AUTH: "ERROR_IN_AUTH",
 }
 
 function AuthContextProvider(props) {
@@ -58,14 +57,7 @@ function AuthContextProvider(props) {
                     errorMessage: null,
                 })
             }
-            case AuthActionType.ERROR_IN_REGISTER: {
-                return setAuth({
-                    user: null,
-                    loggedIn: false,
-                    errorMessage: payload.error,
-                })
-            }
-            case AuthActionType.ERROR_IN_LOGIN: {
+            case AuthActionType.ERROR_IN_AUTH: {
                 return setAuth({
                     user: null,
                     loggedIn: false,
@@ -106,7 +98,7 @@ function AuthContextProvider(props) {
         }catch(error){
             let errorMessage = error.response.data.errorMessage;
             authReducer({
-                type: AuthActionType.ERROR_IN_REGISTER,
+                type: AuthActionType.ERROR_IN_AUTH,
                 payload: {
                     error: errorMessage
                 }
@@ -129,7 +121,7 @@ function AuthContextProvider(props) {
         }catch(error){
             let errorMessage = error.response.data.errorMessage;
             authReducer({
-                type: AuthActionType.ERROR_IN_LOGIN,
+                type: AuthActionType.ERROR_IN_AUTH,
                 payload: {
                     error: errorMessage
                 }
@@ -160,7 +152,7 @@ function AuthContextProvider(props) {
 
     auth.closeProblemModal = function() {
         authReducer({
-            type: AuthActionType.ERROR_IN_REGISTER,
+            type: AuthActionType.ERROR_IN_AUTH,
             payload: {
                 error: null
             }
