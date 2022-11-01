@@ -274,7 +274,7 @@ input {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 1rem;
+  padding: 4rem;
   background: var(--black);
   color: var(--swatch-text);
   cursor: pointer;
@@ -282,6 +282,25 @@ input {
   opacity: 0;
   transition: all 0.35s ease-in;
   font-family: var(--font-primary);
+}
+
+.modal-root {
+  position: relative;
+  max-width: 1200vw;
+  max-height: 600vh;
+  overflow: visible;
+  display: flex;
+  flex-direction: column;
+  background: var(--swatch-complement);
+  cursor: default;
+  border-width: 2px;
+  border-color: black;
+  border-style: solid;
+  box-shadow: 5px 10px #888888;
+}
+
+.modal-root > * {
+  padding: 1rem;
 }
 
 .modal.is-visible {
@@ -329,6 +348,35 @@ input {
 .modal-control {
   cursor: pointer;
   width: 20%;
+}
+
+.modal-center {
+  display: grid;
+  grid-template-columns: 30% 65%;
+  grid-template-rows: 33% 33% 33%;
+  gap: 10px 20px;
+  font-size: 20pt;
+}
+
+.modal-center-content {
+  grid-column: 1 / 3;
+  grid-row: 1 / 4;
+}
+
+.modal-north {
+  font-size:28pt;
+  font-weight: bold;
+  background-color: #669966;
+  color:white;
+}
+
+
+.modal-south {
+  display:flex;
+  flex-direction: row;
+  background-color: lightgray;
+  align-items: center;
+  justify-content: center;
 }
 
 .dialog-header {
