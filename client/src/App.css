@@ -137,10 +137,12 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  pointer-events: none; 
 }
 
 #add-list-button {
   float: left;
+  pointer-events: auto; 
 }
 
 #list-selector-list {
