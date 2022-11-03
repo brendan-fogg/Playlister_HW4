@@ -31,6 +31,7 @@ export default function AppBanner() {
 
     const handleLogout = () => {
         handleMenuClose();
+        store.wipeTransactions();
         auth.logoutUser();
     }
 
