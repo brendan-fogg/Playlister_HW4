@@ -10,6 +10,7 @@ const User = require('../models/user-model');
 createPlaylist = (req, res) => {
     const body = req.body;
     console.log("createPlaylist body: " + JSON.stringify(body));
+    console.log(req.userId);
 
     if (!body) {
         return res.status(400).json({
@@ -24,25 +25,34 @@ createPlaylist = (req, res) => {
         return res.status(400).json({ success: false, error: err })
     }
 
+    const sentEmail = playlist.ownerEmail;
+    console.log(sentEmail);
+
     User.findOne({ _id: req.userId }, (err, user) => {
         console.log("user found: " + JSON.stringify(user));
-        user.playlists.push(playlist._id);
-        user
-            .save()
-            .then(() => {
-                playlist
-                    .save()
-                    .then(() => {
-                        return res.status(201).json({
-                            playlist: playlist
+        if(sentEmail == user.email){
+            user.playlists.push(playlist._id);
+            user
+                .save()
+                .then(() => {
+                    playlist
+                        .save()
+                        .then(() => {
+                            return res.status(201).json({
+                                playlist: playlist
+                            })
                         })
-                    })
-                    .catch(error => {
-                        return res.status(400).json({
-                            errorMessage: 'Playlist Not Created!'
+                        .catch(error => {
+                            return res.status(400).json({
+                                errorMessage: 'Playlist Not Created!'
+                            })
                         })
-                    })
+                });
+        }else{
+            return res.status(400).json({
+                errorMessage: 'Playlist Not Created! Email did not matched that of Logged in User'
             });
+        }
     })
 }
 
