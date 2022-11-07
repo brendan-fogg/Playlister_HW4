@@ -221,6 +221,14 @@ updatePlaylist = async (req, res) => {
                     console.log("correct user!");
                     console.log("req.body.name: " + req.body.name);
 
+                    if(list.name == body.playlist.name && list.songs == body.playlist.songs){
+                        return res.status(200).json({
+                            success: true,
+                            id: list._id,
+                            message: 'Playlist updated!',
+                        });
+                    }
+
                     list.name = body.playlist.name;
                     list.songs = body.playlist.songs;
                     list
