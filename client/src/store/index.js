@@ -161,11 +161,11 @@ function GlobalStoreContextProvider(props) {
                 return setStore({
                     currentModal : CurrentModal.NONE,
                     idNamePairs: store.idNamePairs,
-                    currentList: payload,
+                    currentList: null,
                     currentSongIndex: -1,
                     currentSong: null,
                     newListCounter: store.newListCounter,
-                    listNameActive: true,
+                    listNameActive: payload,
                     listIdMarkedForDeletion: null,
                     listMarkedForDeletion: null
                 });
@@ -524,7 +524,14 @@ function GlobalStoreContextProvider(props) {
     store.setIsListNameEditActive = function () {
         storeReducer({
             type: GlobalStoreActionType.SET_LIST_NAME_EDIT_ACTIVE,
-            payload: null
+            payload: true
+        });
+    }
+
+    store.setIsListNameEditNotActive = function () {
+        storeReducer({
+            type: GlobalStoreActionType.SET_LIST_NAME_EDIT_ACTIVE,
+            payload: false
         });
     }
 

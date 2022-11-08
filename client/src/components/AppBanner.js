@@ -20,6 +20,12 @@ export default function AppBanner() {
     const [anchorEl, setAnchorEl] = useState(null);
     const isMenuOpen = Boolean(anchorEl);
 
+    let edit = store.listNameActive;
+
+    let decoration = { textDecoration: 'none', color: 'white' }
+    if(edit){
+        decoration = { textDecoration: 'none', color: 'gray' }
+    }
     const handleProfileMenuOpen = (event) => {
         console.log("HELLO");
         setAnchorEl(event.currentTarget);
@@ -107,7 +113,11 @@ export default function AppBanner() {
                         component="div"
                         sx={{ display: { xs: 'none', sm: 'block' } }}                       
                     >
-                        <Link onClick={handleClose} style={{ textDecoration: 'none', color: 'white' }} to='/'>⌂</Link>
+                        <Link 
+                            onClick={handleClose} 
+                            style={decoration}
+                            to='/'
+                            disabled={edit}>⌂</Link>
                     </Typography>
                     <Box sx={{ flexGrow: 1 }}>{editToolbar}</Box>
                     <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
@@ -119,6 +129,7 @@ export default function AppBanner() {
                             aria-haspopup="true"
                             onClick={handleProfileMenuOpen}
                             color="inherit"
+                            disabled={edit}
                         >
                             { getAccountMenu(auth.loggedIn) }
                         </IconButton>

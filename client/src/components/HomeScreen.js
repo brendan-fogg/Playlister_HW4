@@ -15,6 +15,8 @@ import Typography from '@mui/material/Typography'
 const HomeScreen = () => {
     const { store } = useContext(GlobalStoreContext);
 
+    let edit = store.listNameActive;
+
     useEffect(() => {
         store.loadIdNamePairs();
     }, []);
@@ -45,6 +47,7 @@ const HomeScreen = () => {
                 aria-label="add"
                 id="add-list-button"
                 onClick={handleCreateNewList}
+                disabled={edit}
             >
                 <AddIcon />
             </Fab>
